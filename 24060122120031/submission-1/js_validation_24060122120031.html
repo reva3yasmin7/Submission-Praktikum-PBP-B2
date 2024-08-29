@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Praktikum PBP 01</title>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body onload="generateCaptcha()">
+    <h1>Form Tambah Data Produk</h1>
+    <form
+    name="formProduk"
+    method="post"
+    onsubmit="return validateForm()" 
+    action=""
+    >
+    <table>
+        <tr>
+            <td><label for="productName">Nama Produk</label></td>
+            <td>
+                <input 
+                type="text"
+                name="productName"
+                id="productName"
+                minlength="5"
+                maxlength="30"
+                placeholder="Masukkan nama produk"
+                />
+            </td>
+        </tr>
+        <tr>
+            <td>Deskripsi</td>
+            <td>
+                <textarea 
+                name="deskripsi"
+                rows="5"
+                cols="22"
+                minlength="5"
+                maxlength="100"
+                placeholder="Masukkan deskripsi produk"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="kategori">Kategori</label></td>
+            <td>
+                <select name="kategori" id="kategori" onchange="get_kategori()">
+                    <option value="">--Pilih Kategori--</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="sub-kategori">Sub Kategori</label></td>
+            <td>
+                <select name="sub-kategori" id="sub-kategori">
+                    <option value="">--Pilih Sub Kategori--</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="hargasatuan">Harga Satuan</label></td>
+            <td>
+                <input 
+                name="hargasatuan"
+                id="hargasatuan"
+                type="number"
+                value=""
+                placeholder="Masukkan harga satuan"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>Grosir</td>
+            <td>
+                <input type="radio" name="grosir" id="ya" value="ya"/>
+                <label for="ya">Ya</label><br/>
+                <input type="radio" name="grosir" id="tidak" value="tidak"/>
+                <label for="tidak">Tidak</label><br/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="hargagrosir">Harga Grosir</label></td>
+            <td>
+                <input 
+                name="hargagrosir"
+                id="hargagrosir"
+                value=""
+                type="number"
+                placeholder="Masukkan harga grosir"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td><label for="jasakirim">Jasa Kirim</label></td>
+            <td>
+                <input 
+                type="checkbox"
+                name="jasakirim"
+                id="jne"
+                value="jne"
+                />
+                <label for="jne">JNE</label><br/>
+                <input 
+                type="checkbox" 
+                name="jasakirim" 
+                id="tiki" 
+                value="tiki"
+                />
+                <label for="tiki">TIKI</label><br/>
+                <input 
+                type="checkbox"
+                name="jasakirim"
+                id="sicepat"
+                value="sicepat"
+                />
+                <label for="sicepat">SiCepat</label><br/>
+                <input 
+                type="checkbox"
+                name="jasakirim"
+                id="ninjaexpress"
+                value="ninjaexpress"
+                />
+                <label for="ninjaexpress">Ninja Express</label><br/>
+                <input 
+                type="checkbox" 
+                name="jasakirim" 
+                id="wahana"
+                value="wahana"
+                />
+                <label for="wahana">Wahana</label>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="captcha">Captcha</label></td>
+            <td><input 
+                type="text"
+                name="captcha_soal"
+                size="10"
+                disabled
+                />
+                <input 
+                type="text"
+                name="captcha_input"
+                id="captcha_input"
+                size="10"
+                />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <br/><input type="submit" name="submit" value="Submit"/>&nbsp;
+                <input type="reset" name="reset" value="Reset"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
