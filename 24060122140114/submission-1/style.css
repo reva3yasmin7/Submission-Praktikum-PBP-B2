@@ -1,0 +1,9 @@
+.form-container {
+    border: 2px solid blue;
+    padding: 20px;
+    width: fit-content;
+}
+
+.inline-label {
+    display: inline;
+}
