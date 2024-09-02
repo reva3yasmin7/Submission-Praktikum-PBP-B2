@@ -1,0 +1,45 @@
+body {
+    justify-content:flex-start;
+}
+.form-container {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #2a689b;
+    margin:10px ;
+    justify-self: baseline;
+    text-align: justify;
+}
+
+.form-group textarea{
+    margin-right: 10px;
+}
+
+.form-group input[type="radio"]{
+        margin-right: 10px;
+}
+
+.form-group input[type="checkbox"]{
+    justify-content: center;
+}
+
+.form-group label {
+    display: inline-flex;
+    margin-inline-end: auto;
+    white-space: nowrap;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+        width: auto;
+}
+
+.form-group .captcha-text{
+    border: 2px;
+    text-wrap-style:balance;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+} 
