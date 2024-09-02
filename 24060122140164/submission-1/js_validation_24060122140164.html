@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form Tambah Data Produk</title>
+</head>
+
+<body onload="generateCaptcha()">
+    <div class="form-container">
+        <h2>Form Tambah Data Produk</h2>
+        <form name="form_produksi" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="nama-produk">Nama Produk</label>
+                <input type="text" name="nama_produk" id="nama-produk" required minlength="5" maxlength="30">
+            </div>
+
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi</label>
+                <textarea name="deskripsi" id="deskripsi" rows="3" minlength="5" maxlength="100"
+                    placeholder="Masukkan deskripsi produk"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="pilih_kategori">Kategori</label>
+                <select name="pilih_kategori" id="pilih_kategori" required onchange="get_kategori()">
+                    <option value="">--Pilih Kategori--</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="AlatTulis">Alat Tulis</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subkategori">Sub Kategori</label>
+                <select name="subkategori" id="subkategori" required>
+                    <option value="">--Pilih Sub Kategori--</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="hargasatuan">Harga Satuan</label>
+                <input type="number" name="harga_satuan" id="hargasatuan" required>
+            </div>
+
+            <div class="form-group">
+                <label>Grosir</label>
+                <div class="pilih-grosir">
+                    <input type="radio" name="grosir" id="grosir_ya" value="ya">
+                    <label for="grosir_ya">Ya</label>
+
+                    <input type="radio" name="grosir" id="grosir_tidak" value="tidak">
+                    <label for="grosir_tidak">Tidak</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="harga_grosir">Harga Grosir</label>
+                <input type="number" name="harga_grosir" id="hargagrosir" placeholder="Masukkan harga grosir">
+            </div>
+
+            <div class="form-group">
+                <label>Jasa Kirim</label>
+                <div class="opsi-jasa">
+                    <input type="checkbox" id="jne" name="jasa_kirim" value="JNE">
+                    <label for="jne">JNE</label>
+
+                    <input type="checkbox" id="tiki" name="jasa_kirim" value="TIKI">
+                    <label for="tiki">TIKI</label>
+
+                    <input type="checkbox" id="siCepat" name="jasa_kirim" value="SiCepat">
+                    <label for="siCepat">SiCepat</label>
+
+                    <input type="checkbox" id="ninja" name="jasa_kirim" value="Ninja Express">
+                    <label for="ninja">Ninja Express</label>
+
+                    <input type="checkbox" id="wahana" name="jasa_kirim" value="Wahana">
+                    <label for="wahana">Wahana</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="captcha">Captcha</label>
+                <input type="text" name="captcha_soal" id="captcha" size="6" readonly />
+                <input type="text" name="captcha_input" id="captcha_input" size="6" />
+            </div>
+            <div class="buttons">
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
