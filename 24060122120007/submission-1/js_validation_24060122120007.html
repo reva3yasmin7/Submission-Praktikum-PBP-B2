@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tambah Data Product</title>
+    <script src="myScript.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Form Tambah Data Product</h2>
+		<form name="formProduk" onsubmit="return validateForm()" method="post">
+			<label for="fnamaProduk">Nama Produk</label>
+            <input type="text" name="fnamaProduk" id="fnamaProduk" minlength="5" maxlength="50" required/><br />
+            
+            <label for="fdeskripsi">Deskripsi</label>
+            <textarea name="fdeskripsi" id="fdeskripsi" minlength="5" maxlength="100" required></textarea> <br />
+
+            <label for="fkategori">Kategori</label>
+            <select id="fkategori" name="fkategori" onchange="updateSubKategori()" required>
+                <option value="">--Pilih Kategori--</option>
+                <option value="baju">Baju</option>
+                <option value="elektronik">Elektronik</option>
+                <option value="alatTulis">Alat Tulis</option>
+            </select><br />
+
+            <label for="fsubKategori">Sub Kategori</label>
+            <select id="fsubKategori" name="fsubKategori" required>
+                <option value="">--Pilih Sub Kategori--</option>
+            </select><br />
+
+            <label for="fhargaSatuan">Harga Satuan</label>
+            <input type="number" name="fhargaSatuan" id="fhargaSatuan" required/><br />
+            
+            <label for="grosir">Grosir</label>
+            <input type="radio" id="ya" name="grosir" value="ya" id="grosirYa" >Ya
+            <input type="radio" id="tidak" name="grosir" value="tidak" id="grosirTidak" checked>Tidak <br />
+            
+            <label for="fhargaGrosir">Harga Grosir</label>
+            <input type="number" name="fhargaGrosir" id="fhargaGrosir" /><br />
+
+            <label for="jasaKirim">Jasa Kirim</label>
+            <input type="checkbox" id="jne" name="jasaKirim" value="jne">JNE
+            <input type="checkbox" id="tiki" name="jasaKirim" value="tiki">TIKI 
+            <input type="checkbox" id="sicepat" name="jasaKirim" value="sicepat">SiCepat
+            <input type="checkbox" id="ninjaExpress" name="jasaKirim" value="ninjaExpress">Ninja Express
+            <input type="checkbox" id="wahana" name="jasaKirim" value="wahana">Wahana
+            <br />
+
+            <!-- CAPTCHA -->
+            <label>CAPTCHA: </label>
+            <input type="text" id="captcha" name="captcha" readonly />
+            <input type="text" id="inputCaptcha" name="inputCaptcha" required />
+            <br />
+
+
+            <input type="submit" value="Submit" />
+            <input type="button" value="Reset" onclick="resetForm()" />
+		</form>
+</body>
+</html>
