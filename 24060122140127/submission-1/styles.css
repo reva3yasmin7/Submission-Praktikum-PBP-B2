@@ -1,0 +1,133 @@
+
+body {
+    font-family: 'Cambria', serif;
+    background-color: #e0ffff; 
+    margin: 0;
+    padding: 20px;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+legend {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+    position: relative;
+}
+
+legend::after {
+    content: '';
+    display: block;
+    width: calc(100% + 20px);
+    height: 2px;
+    background-color: #333;
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-group label {
+    width: 150px;
+    font-weight: bold;
+    display: inline-block;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 160px);
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: none;
+}
+
+.form-group input[type="submit"],
+.form-group input[type="reset"] {
+    width: 48%;
+    padding: 10px;
+    margin: 5px 1%;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-group input[type="reset"] {
+    background-color: #f44336;
+}
+
+.form-group input[type="checkbox"],
+.form-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.grosir-group {
+    display: flex;
+    flex-direction: column; 
+    margin-left: 150px; 
+}
+
+.grosir-group label {
+    margin-bottom: 5px; 
+}
+
+.captcha-group {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 10px; 
+}
+
+.captcha-group label {
+    margin-right: 5px; 
+}
+
+.captcha-group input[type="text"]#captchaValue {
+    width: 25%; 
+    margin-right: 5px;
+    background-color: #d3d3d3;
+    border: 1px solid #ccc;
+}
+
+.captcha-group input[type="text"]#captchaInput {
+    width: 45%; 
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-left: 160px; 
+}
