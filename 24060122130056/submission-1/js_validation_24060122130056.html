@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form Tambah Data Produk</title>
+    <script src="validation.js"></script>
+   
+
+</head>
+<body>
+    <form name="formProduk" onsubmit="return validateForm()" method="post">
+        <fieldset>
+            
+            <h1> Form Tambah Produk</h1>
+            <!-- Nama Produk -->
+            <div class="form-group">
+                <label for="nama_produk">Nama Produk</label>
+                <input type="text" id="nama_produk" name="nama_produk">
+                <span id="errNamaProduk" class="error"></span>
+            </div>
+
+            <!-- Deskripsi -->
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi</label>
+                <textarea id="deskripsi" name="deskripsi" rows="4"></textarea>
+                <span id="errDeskripsi" class="error"></span>
+            </div>
+
+            <!-- Kategori -->
+            <div class="form-group">
+                <label for="kategori">Kategori</label>
+                <select id="kategori" name="kategori">
+                    <option value="">--Pilih Kategori--</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                </select>
+                <span id="errKategori" class="error"></span>
+            </div>
+
+            <!-- Sub Kategori -->
+            <div class="form-group">
+                <label for="sub_kategori">Sub Kategori</label>
+                <select id="sub_kategori" name="sub_kategori">
+                    <option value="">--Pilih Sub Kategori--</option>
+                </select>
+                <span id="errSubKategori" class="error"></span>
+            </div>
+
+            <!-- Harga Satuan -->
+            <div class="form-group">
+                <label for="harga_satuan">Harga Satuan</label>
+                <input type="text" id="harga_satuan" name="harga_satuan">
+                <span id="errHargaSatuan" class="error"></span>
+            </div>
+
+            <!-- Grosir -->
+            <div class="form-group">
+                <label>Grosir</label>
+                <input type="radio" id="grosir_ya" name="grosir" value="ya" class="inline">
+                <label for="grosir_ya" class="inline">Ya</label>
+                <input type="radio" id="grosir_tidak" name="grosir" value="tidak" class="inline">
+                <label for="grosir_tidak" class="inline">Tidak</label>
+                <span id="errGrosir" class="error"></span>
+            </div>
+
+            <!-- Harga Grosir -->
+            <div class="form-group">
+                <label for="harga_grosir">Harga Grosir</label>
+                <input type="text" id="harga_grosir" name="harga_grosir">
+                <span id="errHargaGrosir" class="error"></span>
+            </div>
+
+            <!-- Jasa Kirim -->
+            <div 
+                <label>Jasa Kirim</label>
+                <div class="inline">
+                    <input type="checkbox" id="jne" name="jasa_kirim" value="JNE">
+                    <label for="jne" class="inline">JNE</label>
+                </div>
+                <div class="inline">
+                    <input type="checkbox" id="tiki" name="jasa_kirim" value="TIKI">
+                    <label for="tiki" class="inline">TIKI</label>
+                </div>
+                <div class="inline">
+                    <input type="checkbox" id="sicepat" name="jasa_kirim" value="SiCepat">
+                    <label for="sicepat" class="inline">SiCepat</label>
+                </div>
+                <div class="inline">
+                    <input type="checkbox" id="ninja" name="jasa_kirim" value="Ninja Express">
+                    <label for="ninja" class="inline">Ninja Express</label>
+                </div>
+                <div class="inline">
+                    <input type="checkbox" id="wahana" name="jasa_kirim" value="Wahana">
+                    <label for="wahana" class="inline">Wahana</label>
+                </div>
+                <span id="errJasaKirim" class="error"></span>
+            </div>
+
+            <!-- Captcha -->
+            <div class="form-group">
+                <label for="captcha">Captcha</label>
+                <input type="text" id="captcha" name="captcha" style="width: 50px;" readonly>
+                <input type="text" id="input_captcha" name="input_captcha">
+                <span id="errCaptcha" class="error"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

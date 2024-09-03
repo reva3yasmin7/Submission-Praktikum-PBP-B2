@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Tambah Data Produk</title>
+    <style>
+        form {
+            border: 1px solid #000;
+            padding: 20px;
+            width: 400px;
+            font-family: Arial, sans-serif;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea, select {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .inline {
+            width: auto;
+            margin-right: 10px;
+        }
+        h2 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="productForm" onsubmit="return validateForm()">
+    <h2>Form Tambah Data Produk</h2>
+    
+    <label>Nama Produk</label>
+    <input type="text" id="productName" name="productName" minlength="5" maxlength="30">
+
+    <label>Deskripsi</label>
+    <textarea id="description" name="description" minlength="5" maxlength="100"></textarea>
+
+    <label>Kategori</label>
+    <select id="category" name="category" onchange="updateSubCategory()">
+        <option value="">--Pilih Kategori--</option>
+        <option value="Baju">Baju</option>
+        <option value="Elektronik">Elektronik</option>
+        <option value="Alat Tulis">Alat Tulis</option>
+    </select>
+
+    <label>Sub Kategori</label>
+    <select id="subCategory" name="subCategory">
+        <option value="">--Pilih Sub Kategori--</option>
+    </select>
+
+    <label>Harga Satuan</label>
+    <input type="number" id="price" name="price">
+
+    <label>Grosir</label>
+    <input type="radio" class="inline" id="wholesaleYes" name="wholesale" value="Yes" onclick="toggleWholesalePrice(true)"> Ya <br>
+    <input type="radio" class="inline" id="wholesaleNo" name="wholesale" value="No" onclick="toggleWholesalePrice(false)"> Tidak <br>
+
+    <label>Harga Grosir</label>
+    <input type="number" id="wholesalePrice" name="wholesalePrice" disabled>
+
+    <label>Jasa Kirim</label>
+    <input type="checkbox" class="inline" name="shipping" value="JNE"> JNE <br>
+    <input type="checkbox" class="inline" name="shipping" value="TIKI"> TIKI <br>
+    <input type="checkbox" class="inline" name="shipping" value="SiCepat"> SiCepat <br>
+    <input type="checkbox" class="inline" name="shipping" value="Ninja Express"> Ninja Express <br>
+    <input type="checkbox" class="inline" name="shipping" value="Wahana"> Wahana <br>
+
+    <label>Captcha</label>
+    <input type="text" id="captchaValue" readonly>
+    <input type="text" id="captchaInput" name="captchaInput" maxlength="5">
+
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+</form>
+
+<script>
+    function updateSubCategory() {
+        const category = document.getElementById('category').value;
+        const subCategory = document.getElementById('subCategory');
+        subCategory.innerHTML = '<option value="">--Pilih Sub Kategori--</option>'; // Reset sub-category options
+
+        if (category === 'Baju') {
+            subCategory.innerHTML += '<option value="Baju Pria">Baju Pria</option>';
+            subCategory.innerHTML += '<option value="Baju Wanita">Baju Wanita</option>';
+            subCategory.innerHTML += '<option value="Baju Anak">Baju Anak</option>';
+        } else if (category === 'Elektronik') {
+            subCategory.innerHTML += '<option value="Mesin Cuci">Mesin Cuci</option>';
+            subCategory.innerHTML += '<option value="Kulkas">Kulkas</option>';
+            subCategory.innerHTML += '<option value="AC">AC</option>';
+        } else if (category === 'Alat Tulis') {
+            subCategory.innerHTML += '<option value="Kertas">Kertas</option>';
+            subCategory.innerHTML += '<option value="Map">Map</option>';
+            subCategory.innerHTML += '<option value="Pulpen">Pulpen</option>';
+        }
+    }
+
+    function toggleWholesalePrice(isWholesale) {
+        document.getElementById('wholesalePrice').disabled = !isWholesale;
+    }
+
+    function generateCaptcha() {
+        let captcha = '';
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        for (let i = 0; i < 5; i++) {
+            captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById('captchaValue').value = captcha;
+    }
+
+    function validateForm() {
+        const productName = document.getElementById('productName').value;
+        const description = document.getElementById('description').value;
+        const category = document.getElementById('category').value;
+        const subCategory = document.getElementById('subCategory').value;
+        const price = document.getElementById('price').value;
+        const wholesaleYes = document.getElementById('wholesaleYes').checked;
+        const wholesalePrice = document.getElementById('wholesalePrice').value;
+        const shipping = document.querySelectorAll('input[name="shipping"]:checked');
+        const captchaValue = document.getElementById('captchaValue').value;
+        const captchaInput = document.getElementById('captchaInput').value;
+
+        if (productName.length < 5 || productName.length > 30) {
+            alert('Nama produk harus diisi dengan minimal 5 karakter dan maksimal 30 karakter.');
+            return false;
+        }
+
+        if (description.length < 5 || description.length > 100) {
+            alert('Deskripsi harus diisi dengan minimal 5 karakter dan maksimal 100 karakter.');
+            return false;
+        }
+
+        if (!category) {
+            alert('Kategori harus diisi.');
+            return false;
+        }
+
+        if (!subCategory) {
+            alert('Sub Kategori harus diisi.');
+            return false;
+        }
+
+        if (!price || isNaN(price)) {
+            alert('Harga satuan harus diisi dengan nilai numerik.');
+            return false;
+        }
+
+        if (wholesaleYes && (!wholesalePrice || isNaN(wholesalePrice))) {
+            alert('Harga grosir harus diisi dengan nilai numerik.');
+            return false;
+        }
+
+        if (shipping.length < 3) {
+            alert('Minimal 3 jasa kirim harus dipilih.');
+            return false;
+        }
+
+        if (captchaInput !== captchaValue) {
+            alert('Captcha tidak sesuai.');
+            return false;
+        }
+
+        alert('Form berhasil disubmit!');
+        return true;
+    }
+
+    window.onload = generateCaptcha;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tambah Data Produk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+
+<div class="form-container">
+    <h2>Form Tambah Data Produk</h2>
+    <form id="productForm">
+        <div class="form-group">
+            <label for="nama-produk">Nama Produk</label>
+            <input type="text" id="nama-produk" name="nama-produk">
+            <div class="error" id="nama-produk-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="deskripsi">Deskripsi Produk</label>
+            <textarea id="deskripsi" name="deskripsi" rows="4"></textarea>
+            <div class="error" id="deskripsi-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="kategori">Kategori</label>
+            <select id="kategori" name="kategori">
+                <option value="">--Pilih Kategori--</option>
+                <option value="Baju">Baju</option>
+                <option value="Elektronik">Elektronik</option>
+                <option value="Alat Tulis">Alat Tulis</option>
+            </select>
+            <div class="error" id="kategori-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="sub-kategori">Sub Kategori</label>
+            <select id="sub-kategori" name="sub-kategori">
+                <option value="">--Pilih Sub Kategori--</option>
+            </select>
+            <div class="error" id="sub-kategori-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="harga-satuan">Harga Satuan</label>
+            <input type="text" id="harga-satuan" name="harga-satuan">
+            <div class="error" id="harga-satuan-error"></div>
+        </div>
+        <div class="form-group">
+            <label>Grosir</label>
+            <input type="radio" id="grosir-ya" name="grosir" value="ya">
+            <label for="grosir-ya">Ya</label>
+            <input type="radio" id="grosir-tidak" name="grosir" value="tidak">
+            <label for="grosir-tidak">Tidak</label>
+            <div class="error" id="grosir-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="harga-grosir">Harga Grosir</label>
+            <input type="text" id="harga-grosir" name="harga-grosir" disabled>
+            <div class="error" id="harga-grosir-error"></div>
+        </div>
+        <div class="form-group">
+            <label>Jasa Kirim</label>
+            <input type="checkbox" id="jne" name="jasa-kirim" value="JNE">
+            <label for="jne">JNE</label><br>
+            <input type="checkbox" id="tiki" name="jasa-kirim" value="TIKI">
+            <label for="tiki">TIKI</label><br>
+            <input type="checkbox" id="sicepat" name="jasa-kirim" value="SiCepat">
+            <label for="sicepat">SiCepat</label><br>
+            <input type="checkbox" id="ninja" name="jasa-kirim" value="Ninja Express">
+            <label for="ninja">Ninja Express</label><br>
+            <input type="checkbox" id="wahana" name="jasa-kirim" value="Wahana">
+            <label for="wahana">Wahana</label>
+            <div class="error" id="jasa-kirim-error"></div>
+        </div>
+        <div class="form-group captcha">
+            <label for="captcha">Captcha</label>
+            <span id="captcha-text"></span>
+            <input type="text" id="captcha" name="captcha">
+            <div class="error" id="captcha-error"></div>
+        </div>
+        <div class="form-buttons">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Captcha generation
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            let captcha = '';
+            for (let i = 0; i < 5; i++) {
+                const randomIndex = Math.floor(Math.random() * chars.length);
+                captcha += chars.charAt(randomIndex);
+            }
+            document.getElementById('captcha-text').textContent = captcha;
+        }
+
+        generateCaptcha();
+
+        // Sub Kategori logic based on Kategori selection
+        const kategori = document.getElementById('kategori');
+        const subKategori = document.getElementById('sub-kategori');
+        kategori.addEventListener('change', function () {
+            let options = '<option value="">--Pilih Sub Kategori--</option>';
+            if (kategori.value === 'Baju') {
+                options += '<option value="Baju Pria">Baju Pria</option>';
+                options += '<option value="Baju Wanita">Baju Wanita</option>';
+                options += '<option value="Baju Anak">Baju Anak</option>';
+            } else if (kategori.value === 'Elektronik') {
+                options += '<option value="Mesin Cuci">Mesin Cuci</option>';
+                options += '<option value="Kulkas">Kulkas</option>';
+                options += '<option value="AC">AC</option>';
+            } else if (kategori.value === 'Alat Tulis') {
+                options += '<option value="Kertas">Kertas</option>';
+                options += '<option value="Map">Map</option>';
+                options += '<option value="Pulpen">Pulpen</option>';
+            }
+            subKategori.innerHTML = options;
+        });
+
+        // Grosir logic
+        const grosirYa = document.getElementById('grosir-ya');
+        const grosirTidak = document.getElementById('grosir-tidak');
+        const hargaGrosir = document.getElementById('harga-grosir');
+        grosirYa.addEventListener('change', function () {
+            hargaGrosir.disabled = false;
+        });
+        grosirTidak.addEventListener('change', function () {
+            hargaGrosir.disabled = true;
+            hargaGrosir.value = '';
+        });
+
+        // Form validation
+        document.getElementById('productForm').addEventListener('submit', function (e) {
+            let valid = true;
+
+            // Nama Produk validation
+            const namaProduk = document.getElementById('nama-produk').value;
+            const namaProdukError = document.getElementById('nama-produk-error');
+            if (namaProduk.length < 5 || namaProduk.length > 30) {
+                namaProdukError.textContent = 'Nama produk harus diisi, minimal 5 karakter, maksimal 30 karakter';
+                valid = false;
+            } else {
+                namaProdukError.textContent = '';
+            }
+
+            // Deskripsi Produk validation
+            const deskripsi = document.getElementById('deskripsi').value;
+            const deskripsiError = document.getElementById('deskripsi-error');
+            if (deskripsi.length < 5 || deskripsi.length > 100) {
+                deskripsiError.textContent = 'Deskripsi produk harus diisi, minimal 5 karakter, maksimal 100 karakter';
+                valid = false;
+            } else {
+                deskripsiError.textContent = '';
+            }
+
+            // Kategori validation
+            const kategoriValue = document.getElementById('kategori').value;
+            const kategoriError = document.getElementById('kategori-error');
+            if (!kategoriValue) {
+                kategoriError.textContent = 'Kategori harus dipilih';
+                valid = false;
+            } else {
+                kategoriError.textContent = '';
+            }
+
+            // Sub Kategori validation
+            const subKategoriValue = document.getElementById('sub-kategori').value;
+            const subKategoriError = document.getElementById('sub-kategori-error');
+            if (!subKategoriValue) {
+                subKategoriError.textContent = 'Sub kategori harus dipilih';
+                valid = false;
+            } else {
+                subKategoriError.textContent = '';
+            }
+
+            // Harga Satuan validation
+            const hargaSatuan = document.getElementById('harga-satuan').value;
+            const hargaSatuanError = document.getElementById('harga-satuan-error');
+            if (isNaN(hargaSatuan) || hargaSatuan === '') {
+                hargaSatuanError.textContent = 'Harga satuan harus berupa nilai numerik';
+                valid = false;
+            } else {
+                hargaSatuanError.textContent = '';
+            }
+
+            // Harga Grosir validation
+            const hargaGrosirValue = document.getElementById('harga-grosir').value;
+            const hargaGrosirError = document.getElementById('harga-grosir-error');
+            if (grosirYa.checked && (isNaN(hargaGrosirValue) || hargaGrosirValue === '')) {
+                hargaGrosirError.textContent = 'Harga grosir harus berupa nilai numerik jika Grosir adalah Ya';
+                valid = false;
+            } else {
+                hargaGrosirError.textContent = '';
+            }
+
+            // Jasa Kirim validation
+            const jasaKirimError = document.getElementById('jasa-kirim-error');
+            const jasaKirimCheckboxes = document.querySelectorAll('input[name="jasa-kirim"]:checked');
+            if (jasaKirimCheckboxes.length < 3) {
+                jasaKirimError.textContent = 'Minimal jasa kirim yang dipilih adalah 3';
+                valid = false;
+            } else {
+                jasaKirimError.textContent = '';
+            }
+
+            // Captcha validation
+            const captchaValue = document.getElementById('captcha').value;
+            const captchaError = document.getElementById('captcha-error');
+            const captchaText = document.getElementById('captcha-text').textContent;
+            if (captchaValue !== captchaText) {
+                captchaError.textContent = 'Captcha tidak sesuai';
+                valid = false;
+            } else {
+                captchaError.textContent = '';
+            }
+
+            if (!valid) {
+                e.preventDefault(); // Prevent form submission if not valid
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
